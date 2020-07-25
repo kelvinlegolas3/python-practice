@@ -33,25 +33,31 @@ def validate_combination(combination):
 
 
 def is_game_over(table):
+    combinations = []
     for row in table:
         row_combination = "".join(row)
-        return validate_combination(row_combination)
+        combinations.append(row_combination)
 
     for index, row in enumerate(table):
         columns = [x[index] for x in table]
         column_combination = "".join(columns)
-        return validate_combination(column_combination)
+        combinations.append(column_combination)
 
     slash_combination = ""
     for index, row in enumerate(table):
         slash_combination = slash_combination + row[index]
-        return validate_combination(slash_combination)
+        combinations.append(slash_combination)
 
     backslash_combination = ""
     for index, row in enumerate(table):
         backslash_combination = backslash_combination + row[::-1][index]
-        return validate_combination(backslash_combination)
+        combinations.append(backslash_combination)
 
+    print(combinations)
+    possibilities = list(filter(validate_combination, combinations))
+    return len(possibilities) > 0
+
+    print(fuck)
 
 # Tic Tac Toe - Game
 player1_symbol = input("Choose 1st player's symbol: ")
