@@ -1,4 +1,4 @@
-# Assessment 3  : Python Statements
+# Assessment 3  : Functions
 # Link          : https://github.com/Pierian-Data/Complete-Python-3-Bootcamp/blob/master/03-Methods%20and%20Functions/03-Function%20Practice%20Exercises.ipynb
 
 # 1.
@@ -153,10 +153,11 @@ print("\nExercise # 11:")
 
 
 def spy_game(nums):
-    result = ""
+    code = [0, 0, 7, 'x']
     for num in nums:
-        result = result + str(num)
-    return True if "007" in result else False
+        if num == code[0]:
+            code.pop(0)
+    return len(code) == 1
 
 
 print(spy_game([1, 2, 4, 0, 0, 7, 5]))
