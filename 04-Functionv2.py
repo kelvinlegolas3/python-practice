@@ -52,10 +52,9 @@ print("\nExercise # 5:")
 
 
 def multiply(nums):
-    result = nums[0]
-    for index, num in enumerate(nums):
-        if index > 1:
-            result = result + (result * num)
+    result = 1
+    for num in nums:
+        result = result * num
     return result
 
 
@@ -80,12 +79,11 @@ print("\nExercise # 7:")
 
 import string
 def ispangram(statement):
-    alphabet_list = list(string.ascii_lowercase)
-    for letter in statement:
-        if letter in alphabet_list:
-            alphabet_list.remove(letter)
+    alphabet_list = set(string.ascii_lowercase)
+    statement = statement.replace(" ", "").lower()
+    statement = set(statement)
 
-    return True if len(alphabet_list) == 0 else False
+    return statement == alphabet_list
 
 
 print(ispangram("The quick brown fox jumps over the lazy dog"))
