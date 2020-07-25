@@ -1,37 +1,19 @@
-def initialize_table():
-    return [["X", "X", "O"],
-            ["O", "O", "O"],
-            ["X", "X", "O"]]
+def validate_combination(combination):
+    if not row_combination.isspace() and combination[0]*3 == combination:
+        return True
+    else:
+        return False
+    return True
 
 
-def is_game_over(table):
-    result = False
+table = [["X", "X", "X"],
+ [" ", " ", " "],
+ [" ", " ", " "]]
 
-    for row in table:
-        filled_row = "".join(row)
-        if filled_row == "XXX" or filled_row == "OOO":
-            result = True
+result = False
 
-    for index, row in enumerate(table):
-        columns = [x[index] for x in table]
-        filled_columns = "".join(columns)
-        if filled_columns == "XXX" or filled_columns == "OOO":
-            result = True
+for row in table:
+    row_combination = "".join(row)
+    result = validate_combination(row_combination)
 
-    slash_combination = ""
-    for index, row in enumerate(table):
-        slash_combination = slash_combination + row[index]
-    if slash_combination == "XXX" or slash_combination == "OOO":
-        result = True
-
-    backslash_combination = ""
-    for index, row in enumerate(table):
-        backslash_combination = backslash_combination + row[::-1][index]
-    if backslash_combination == "XXX" or backslash_combination == "OOO":
-        result = True
-
-    return result
-
-
-print(is_game_over(initialize_table()))
-#is_game_over(initialize_table())
+print(result)

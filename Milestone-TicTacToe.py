@@ -4,56 +4,67 @@ def initialize_table():
             [" ", " ", " "]]
 
 
-def change_table(first_move, second_move, table, symbol):
-    table[int(first_move)][int(second_move)] = symbol
-    return table
-
-
 def visualize_table(table):
     return f"{table[0]}\n{table[1]}\n{table[2]}"
 
 
+def change_table(table, symbol):
+    is_input_valid = False
+
+    while not is_input_valid:
+        first_move, second_move = input("What's your move?: ").split()
+        try:
+            if table[int(first_move)][int(second_move)] == " ":
+                is_input_valid = True
+            else:
+                print("Error: Position has already been taken")
+        except IndexError:
+            print("Error: Invalid index")
+
+    else:
+        is_input_valid = True
+        table[int(first_move)][int(second_move)] = symbol
+
+    return table
+
+
 def is_game_over(table):
     result = False
-
-    #Horizontal
     for row in table:
-        filled_row = "".join(row)
-        if filled_row == "XXX" or filled_row == "OOO":
+        row_combination = "".join(row)
+        if not row_combination.isspace() and row_combination[0]*3 == row_combination:
             result = True
 
-    #Vertical
     for index, row in enumerate(table):
-        column = [x[index] for x in table]
-        filled_column = "".join(column)
-        if filled_column == "XXX" or filled_column == "OOO":
+        columns = [x[index] for x in table]
+        column_combination = "".join(columns)
+        if not column_combination.isspace() and column_combination[0] * 3 == column_combination:
             result = True
 
-    #Slash
     slash_combination = ""
     for index, row in enumerate(table):
         slash_combination = slash_combination + row[index]
-    if slash_combination == "XXX" or slash_combination == "OOO":
-        result = True
+        if not row_combination.isspace() and row_combination[0] * 3 == row_combination:
+            result = True
 
-    #Backslash
     backslash_combination = ""
     for index, row in enumerate(table):
         backslash_combination = backslash_combination + row[::-1][index]
-    if backslash_combination == "XXX" or backslash_combination == "OOO":
-        result = True
+        if not backslash_combination.isspace() and backslash_combination[0] * 3 == backslash_combination:
+            result = True
 
     return result
 
 
+# Tic Tac Toe - Game
 player1_symbol = input("Choose 1st player's symbol: ")
 player2_symbol = input("Choose 2nd player's symbol: ")
-game_table = initialize_table()
+
+tictactoe_table = initialize_table()
 symbol = player1_symbol
 
-while not is_game_over(game_table):
-    player_first_move, player_second_move = input("What's your move?: ").split()
-    round_table_result = change_table(player_first_move, player_second_move, game_table, symbol)
+while is_game_over(tictactoe_table):
+    round_table_result = change_table(tictactoe_table, symbol)
 
     if symbol == player1_symbol:
         symbol = player2_symbol
@@ -61,3 +72,5 @@ while not is_game_over(game_table):
         symbol = player1_symbol
 
     print(visualize_table(round_table_result))
+else:
+    print("Game over! Congratulations!")
