@@ -22,7 +22,6 @@ def change_table(table, symbol):
             print("Error: Invalid index")
 
     else:
-        is_input_valid = True
         table[int(first_move)][int(second_move)] = symbol
 
     return table
