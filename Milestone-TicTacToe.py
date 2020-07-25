@@ -28,33 +28,30 @@ def change_table(table, symbol):
     return table
 
 
-def is_game_over(table):
-    result = False
+def validate_combination(combination):
+    if not combination.isspace() and combination[0]*3 == combination:
+        return True
 
+
+def is_game_over(table):
     for row in table:
         row_combination = "".join(row)
-        if row_combination == "XXX" or row_combination == "OOO":
-            return True
+        return validate_combination(row_combination)
 
     for index, row in enumerate(table):
         columns = [x[index] for x in table]
         column_combination = "".join(columns)
-        if column_combination == "XXX" or column_combination == "OOO":
-            return True
+        return validate_combination(column_combination)
 
     slash_combination = ""
     for index, row in enumerate(table):
         slash_combination = slash_combination + row[index]
-        if slash_combination == "XXX" or slash_combination == "OOO":
-            return True
+        return validate_combination(slash_combination)
 
     backslash_combination = ""
     for index, row in enumerate(table):
         backslash_combination = backslash_combination + row[::-1][index]
-        if backslash_combination == "XXX" or backslash_combination == "OOO":
-            return True
-
-    return result
+        return validate_combination(backslash_combination)
 
 
 # Tic Tac Toe - Game
@@ -72,6 +69,5 @@ while not is_game_over(tictactoe_table):
     else:
         symbol = player1_symbol
 
-    print(visualize_table(round_table_result))
 else:
-    print("Game over! Congratulations!")
+    print("We got a winner!")
