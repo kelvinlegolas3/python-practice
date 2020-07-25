@@ -30,28 +30,29 @@ def change_table(table, symbol):
 
 def is_game_over(table):
     result = False
+
     for row in table:
         row_combination = "".join(row)
-        if not row_combination.isspace() and row_combination[0]*3 == row_combination:
-            result = True
+        if row_combination == "XXX" or row_combination == "OOO":
+            return True
 
     for index, row in enumerate(table):
         columns = [x[index] for x in table]
         column_combination = "".join(columns)
-        if not column_combination.isspace() and column_combination[0] * 3 == column_combination:
-            result = True
+        if column_combination == "XXX" or column_combination == "OOO":
+            return True
 
     slash_combination = ""
     for index, row in enumerate(table):
         slash_combination = slash_combination + row[index]
-        if not row_combination.isspace() and row_combination[0] * 3 == row_combination:
-            result = True
+        if slash_combination == "XXX" or slash_combination == "OOO":
+            return True
 
     backslash_combination = ""
     for index, row in enumerate(table):
         backslash_combination = backslash_combination + row[::-1][index]
-        if not backslash_combination.isspace() and backslash_combination[0] * 3 == backslash_combination:
-            result = True
+        if backslash_combination == "XXX" or backslash_combination == "OOO":
+            return True
 
     return result
 
@@ -63,7 +64,7 @@ player2_symbol = input("Choose 2nd player's symbol: ")
 tictactoe_table = initialize_table()
 symbol = player1_symbol
 
-while is_game_over(tictactoe_table):
+while not is_game_over(tictactoe_table):
     round_table_result = change_table(tictactoe_table, symbol)
 
     if symbol == player1_symbol:
