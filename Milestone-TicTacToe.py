@@ -69,5 +69,6 @@ while not is_game_over(tictactoe_table):
     else:
         symbol = player1_symbol
 
+    print(visualize_table(round_table_result))
 else:
-    print("We got a winner!")
+    print("Game over! Congratulations!")
