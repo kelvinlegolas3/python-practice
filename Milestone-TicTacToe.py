@@ -5,11 +5,14 @@ def initialize_player_inputs():
         player1_symbol = input("Choose 1st player's symbol: ")
         player2_symbol = input("Choose 2nd player's symbol: ")
         
-        if player1_symbol != player2_symbol and not player1_symbol.isspace() and not player2_symbol.isspace():
-            is_symbol_valid = True
-            
+        if len(player1_symbol.strip()) == 0 or len(player2_symbol.strip()) == 0:
+            print("Error: A player has a blank symbol")
+        elif player1_symbol == player2_symbol:
+            print("Error: Both players have the same symbol")
+        elif len(player1_symbol) > 1 or len(player2_symbol) > 1:
+            print("Error: A player's symbol has more than one character")
         else:
-            print("Error: Invalid inputs for Player 1 or Player 2. Try again")
+            is_symbol_valid = True
             
     else:
         return player1_symbol, player2_symbol
