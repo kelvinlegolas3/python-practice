@@ -20,7 +20,7 @@ def initialize_table():
 
 
 def visualize_table(table):
-    return f"{table[0]}\n{table[1]}\n{table[2]}"
+    print(f"{table[0]}\n{table[1]}\n{table[2]}")
 
 
 def change_table(table):
@@ -93,7 +93,7 @@ while not is_game_over(tictactoe_table):
     tictactoe_table = change_table(tictactoe_table)
     current_player = switch_players(current_player)
     
-    print(visualize_table(tictactoe_table))
+    visualize_table(tictactoe_table)
     
 else:
     print("Game over! Congratulations!")
