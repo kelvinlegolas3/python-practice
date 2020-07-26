@@ -27,14 +27,23 @@ def change_table(table):
     is_input_valid = False
 
     while not is_input_valid:
-        first_move, second_move = input(f"What's your move? [{current_player}]: ").split()
         try:
-            if table[int(first_move)][int(second_move)].isspace():
-                is_input_valid = True
-            else:
+            first_move, second_move = input(f"What's your move? [{current_player}]: ").split()
+            first_move = int(first_move)
+            second_move = int(second_move)
+            
+            if(first_move < 0 or second_move < 0):
+                print("Error: Invalid integer value")
+            elif not table[first_move][second_move].isspace():
                 print("Error: Position has already been taken")
+            else:
+                is_input_valid = True
+                
         except IndexError:
             print("Error: Invalid index")
+            
+        except ValueError:
+            print("Error: Invalid input")
 
     else:
         table[int(first_move)][int(second_move)] = current_player
