@@ -7,8 +7,10 @@ def initialize_player_inputs():
         
         if player1_symbol != player2_symbol and not player1_symbol.isspace() and not player2_symbol.isspace():
             is_symbol_valid = True
+            
         else:
             print("Error: Invalid inputs for Player 1 or Player 2. Try again")
+            
     else:
         return player1_symbol, player2_symbol
 
@@ -34,8 +36,10 @@ def change_table(table):
             
             if(first_move < 0 or second_move < 0):
                 print("Error: Invalid integer value")
+                
             elif not table[first_move][second_move].isspace():
                 print("Error: Position has already been taken")
+                
             else:
                 is_input_valid = True
                 
@@ -54,6 +58,7 @@ def change_table(table):
 def switch_players(player):
     if player == players["Player 1"]:
         player = players["Player 2"]
+        
     else:
         player = players["Player 1"]
         
@@ -86,6 +91,7 @@ def is_game_over(table):
 
     print(f"Debug: {combinations}")
     possibilities = list(filter(validate_combination, combinations))
+    
     return len(possibilities) > 0
 
 
