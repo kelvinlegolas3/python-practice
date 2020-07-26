@@ -68,16 +68,14 @@ def is_game_over(table):
         columns = [x[index] for x in table]
         column_combination = "".join(columns)
         combinations.append(column_combination)
-
-
-    for index, row in enumerate(table):
+        
         slash_combination = slash_combination + row[index]
         combinations.append(slash_combination)
         
         backslash_combination = backslash_combination + row[::-1][index]
         combinations.append(backslash_combination)
 
-    #print(f"Debug: {combinations}")
+    print(f"Debug: {combinations}")
     possibilities = list(filter(validate_combination, combinations))
     return len(possibilities) > 0
 
