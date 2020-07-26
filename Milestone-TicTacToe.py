@@ -90,10 +90,10 @@ players = {"Player 1": player1, "Player 2": player2}
 current_player = players["Player 1"]
 
 while not is_game_over(tictactoe_table):
-    round_table_result = change_table(tictactoe_table)
+    tictactoe_table = change_table(tictactoe_table)
     current_player = switch_players(current_player)
     
-    print(visualize_table(round_table_result))
+    print(visualize_table(tictactoe_table))
     
 else:
     print("Game over! Congratulations!")
