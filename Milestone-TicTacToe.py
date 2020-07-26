@@ -1,3 +1,18 @@
+def initialize_player_inputs():
+    is_symbol_valid = False
+
+    while not is_symbol_valid:
+        player1_symbol = input("Choose 1st player's symbol: ")
+        player2_symbol = input("Choose 2nd player's symbol: ")
+        
+        if player1_symbol != player2_symbol and not player1_symbol.isspace() and not player2_symbol.isspace():
+            is_symbol_valid = True
+        else:
+            print("Error: Invalid inputs for Player 1 or Player 2. Try again")
+    else:
+        return player1_symbol, player2_symbol
+
+
 def initialize_table():
     return [[" ", " ", " "],
             [" ", " ", " "],
@@ -8,13 +23,13 @@ def visualize_table(table):
     return f"{table[0]}\n{table[1]}\n{table[2]}"
 
 
-def change_table(table, symbol):
+def change_table(table):
     is_input_valid = False
 
     while not is_input_valid:
-        first_move, second_move = input(f"What's your move? [{symbol}]: ").split()
+        first_move, second_move = input(f"What's your move? [{current_player}]: ").split()
         try:
-            if table[int(first_move)][int(second_move)] == " ":
+            if table[int(first_move)][int(second_move)].isspace():
                 is_input_valid = True
             else:
                 print("Error: Position has already been taken")
@@ -22,9 +37,18 @@ def change_table(table, symbol):
             print("Error: Invalid index")
 
     else:
-        table[int(first_move)][int(second_move)] = symbol
+        table[int(first_move)][int(second_move)] = current_player
 
     return table
+
+
+def switch_players(player):
+    if player == players["Player 1"]:
+        player = players["Player 2"]
+    else:
+        player = players["Player 1"]
+        
+    return player
 
 
 def validate_combination(combination):
@@ -34,45 +58,42 @@ def validate_combination(combination):
 
 def is_game_over(table):
     combinations = []
-    for row in table:
+    slash_combination = ""
+    backslash_combination = ""
+    
+    for index, row in enumerate(table):
         row_combination = "".join(row)
         combinations.append(row_combination)
-
-    for index, row in enumerate(table):
+        
         columns = [x[index] for x in table]
         column_combination = "".join(columns)
         combinations.append(column_combination)
 
-    slash_combination = ""
+
     for index, row in enumerate(table):
         slash_combination = slash_combination + row[index]
         combinations.append(slash_combination)
-
-    backslash_combination = ""
-    for index, row in enumerate(table):
+        
         backslash_combination = backslash_combination + row[::-1][index]
         combinations.append(backslash_combination)
 
-    print(f"Debug: {combinations}")
+    #print(f"Debug: {combinations}")
     possibilities = list(filter(validate_combination, combinations))
     return len(possibilities) > 0
 
 
 # Tic Tac Toe - Game
-player1_symbol = input("Choose 1st player's symbol: ")
-player2_symbol = input("Choose 2nd player's symbol: ")
-
 tictactoe_table = initialize_table()
-symbol = player1_symbol
+player1, player2 = initialize_player_inputs()
+
+players = {"Player 1": player1, "Player 2": player2}
+current_player = players["Player 1"]
 
 while not is_game_over(tictactoe_table):
-    round_table_result = change_table(tictactoe_table, symbol)
-
-    if symbol == player1_symbol:
-        symbol = player2_symbol
-    else:
-        symbol = player1_symbol
-
+    round_table_result = change_table(tictactoe_table)
+    current_player = switch_players(current_player)
+    
     print(visualize_table(round_table_result))
+    
 else:
     print("Game over! Congratulations!")
