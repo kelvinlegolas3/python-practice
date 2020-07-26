@@ -7,10 +7,13 @@ def initialize_player_inputs():
         
         if len(player1_symbol.strip()) == 0 or len(player2_symbol.strip()) == 0:
             print("Error: A player has a blank symbol")
+            
         elif player1_symbol == player2_symbol:
             print("Error: Both players have the same symbol")
+            
         elif len(player1_symbol) > 1 or len(player2_symbol) > 1:
             print("Error: A player's symbol has more than one character")
+            
         else:
             is_symbol_valid = True
             
