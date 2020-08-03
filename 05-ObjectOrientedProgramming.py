@@ -20,6 +20,9 @@ class Line():
         print(sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2))
         
     def slope(self):
+        x1, y1 = self.coor1
+        x2, y2 = self.coor2
+        
         print((y2 - y1) / (x2 - x1))
 
 
