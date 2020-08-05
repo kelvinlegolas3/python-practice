@@ -12,3 +12,5 @@ def function():
     print(second)
 
 function()
+
+#pylint Practice/unit_test -r y
