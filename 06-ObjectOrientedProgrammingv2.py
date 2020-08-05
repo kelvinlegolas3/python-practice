@@ -14,12 +14,12 @@ class Account:
         return f"Account owner: {self.owner} \nAccount balance: ${self.balance}"
     
     def deposit(self, amount):
-        self.balance = self.balance + amount
+        self.balance += amount
         return f"Deposit Accepted. Your balance now is: {self.balance}"
     
     def withdraw(self, amount):
         if self.balance >= amount:
-            self.balance = self.balance - amount
+            self.balance -= amount
             return f"Withdrawal Accepted. Your balance now is {self.balance}"
         else:
             return f"Attempted withdraw amount is: {amount}. Your remaning balance is only {self.balance}"
