@@ -5,16 +5,15 @@
 print("Exercise # 1:")
 string1 = "Print only the words that start with s in this sentence"
 splittedString1 = string1.split(" ")
-for word in splittedString1:
-    if word[0].lower().count('s') != 0:
-        print(f"Yes na yes this word has an s in it: {word}")
+s_list = [s for s in splittedString1 if s[0].lower().count('s') != 0]
+
+print(f"Given: {string1}")
+print(f"List of words that starts with an 's' on it: {s_list}")
 
 # 2.
 print("\nExercise # 2:")
-evenIntegersList = list(range(11))
-for integer in evenIntegersList:
-    if integer % 2 == 0:
-        print(integer)
+even_list = [even for even in list(range(11)) if even % 2 == 0]
+print(f"List of even numbers from 1 to 11: {even_list}")
 
 # 3.
 print("\nExercise # 3:")
