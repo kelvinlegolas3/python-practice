@@ -85,12 +85,10 @@ print(almost_there(209))
 print("\nExercise # 7:")
 
 
-def has_33(nums):
-    result = ""
-    for num in nums:
-        result = result + str(num)
+def has_33(numbers):
+    str_converted_numbers = [str(number) for number in numbers]
+    result = "".join(str_converted_numbers)
     return True if "33" in result else False
-
 
 print(has_33([1, 3, 3]))
 print(has_33([1, 3, 1, 3]))
